@@ -8,11 +8,13 @@ import pandas as pd
 import requests_cache
 from retry_requests import retry
 
-# obtaining lat and long
+
 country = input("Enter a country: ")
 
 base_url_geo = "https://geocoding-api.open-meteo.com/v1/search"
 base_url_forecast = "https://api.open-meteo.com/v1/forecast"
+
+# geo locates longitude and latitude through geolocation api (get request)
 
 response_geo = requests.get(base_url_geo, params= {"name" : country, "count" : 1})
 geo_info = response_geo.json()
