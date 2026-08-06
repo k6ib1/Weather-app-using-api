@@ -46,6 +46,7 @@ print(f"Elevation: {response.Elevation()} m asl")
 print(f"Timezone difference to GMT+0: {response.UtcOffsetSeconds()}s")
 
 # Process hourly data. The order of variables needs to be the same as requested.
+# Custom module from api + numpy
 hourly = response.Hourly()
 hourly_temperature_2m = hourly.Variables(0).ValuesAsNumpy()
 
