@@ -31,8 +31,12 @@ label.pack()
 def click():
     rando_capital = random.choice(capitals)
     print(f"The capital is ... {rando_capital}!")
-    weather = fetch_weather_data(rando_capital)
-    return(weather)
+    data = fetch_weather_data(rando_capital)
+    print(f"The latitude is: {data["latitude"]} ")
+    print(f"The longitude is: {data["longitude"]}")
+    print(f"The elevation is: {data["elevation"]}")
+    print(f"Hourly data: {data["hourly"]}")
+    
 
 
 
@@ -45,6 +49,9 @@ button.pack()
 button.place(relx=0.15, rely=0.20, anchor=CENTER)
 button.config(command=click)
 
+rando_display = Label(window, text = click, )
+rando_display.place(relx=0.5, rely=0.5, anchor= CENTER)
+label.pack()
 
 
 
