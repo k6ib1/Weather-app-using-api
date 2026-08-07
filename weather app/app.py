@@ -52,7 +52,16 @@ rando_frame = Frame(window,
                     relief = "raised",
                     )
 
+
 rando_frame.place(x=30, y=140, width=500, height=800)
+
+body_frame = Frame(window,
+                    bg="#151515",
+                    bd=7,
+                    relief = "raised",                   
+                   )
+
+body_frame.place(x=750, y= 200, width=1700, height=1000)
 
 capital_label = Label(
     window,
@@ -146,7 +155,8 @@ button = Button(
     text="Random Capital!",
     bg="black",
     fg="#00ff00",
-    font=("Arial", 20)
+    font=("Arial", 20),
+    cursor="hand1"
 )
 
 
@@ -189,6 +199,24 @@ button.grid(
     pady=20,
     sticky="w"
 )
+
+
+# ---------------- ENTRIES ---------------------------
+title = Label(window, text="Enter a location below:",
+                font=("Arial",20),
+                bg="#151515",
+                bd=7,
+                relief = "raised",
+                fg="#00ff00"
+               )
+title.place(x=800, y= 210,)
+
+location_entry = Entry(font=("Arial",25), width=50)
+location_entry.place(x=800, y= 260,)
+
+
+
+
 
 
 # ---------------- GRID CONFIGURATION ----------------
