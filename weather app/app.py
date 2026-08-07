@@ -6,13 +6,10 @@ from tkinter import *
 window = Tk()
 window.title("What Weather")
 window.geometry("420x420")
-window.mainloop(). # place window on screen
 window.config(background="")
 
-icon = Photoimage(file="sample.png")
+window.mainloop() # place window on screen
+
+
+icon = PhotoImage(file='images.png')
 window.iconphoto(True,icon)
-
-
-
-
-
