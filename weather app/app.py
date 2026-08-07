@@ -148,6 +148,10 @@ hourly_label.grid(
 )
 
 
+# --------------- ENTRY STRUCTURE ---------------
+
+
+
 # ---------------- RANDOM BUTTON ----------------
 
 button = Button(
@@ -201,7 +205,7 @@ button.grid(
 )
 
 
-# ---------------- ENTRIES ---------------------------
+# ---------------- ENTRY AREA ---------------------------
 title = Label(window, text="Enter a location below:",
                 font=("Arial",20),
                 bg="#151515",
@@ -213,6 +217,48 @@ title.place(x=800, y= 210,)
 
 location_entry = Entry(font=("Arial",25), width=50)
 location_entry.place(x=800, y= 260,)
+
+def submit():
+    location = location_entry.get()
+    entry_data = fetch_weather_data(location)
+
+    latitude_name.config(
+        text=f"Latitude: {entry_data['latitude']}"
+    )
+
+    longitude_name.config(
+        text=f"Longitude: {entry_data['longitude']}"
+    )
+
+    elevation_name.config(
+        text=f"Elevation: {entry_data['elevation']}"
+    )
+    hourly_name.config(
+        text=f"\nHourly Data:\n {entry_data["hourly"]}",
+        font=("Courier New", 12),
+        justify="left"
+    )
+
+
+longitude_name = Label(body_frame, text="Longitude: ",bg="#151515",bd=7,fg="#00ff00", font=("Arial",30))
+longitude_name.place(x=45,y=200)
+
+latitude_name = Label(body_frame, text="Latitude: ",bg="#151515",bd=7,fg="#00ff00", font=("Arial",30))
+latitude_name.place(x=45,y=270)
+
+elevation_name = Label(body_frame, text="Elevation: ",bg="#151515",bd=7,fg="#00ff00", font=("Arial",30))
+elevation_name.place(x=45,y=340)
+
+hourly_name = Label(body_frame, text="Hourly: ",bg="#151515",bd=7,fg="#00ff00", font=("Arial",30))
+hourly_name.place(x=45,y=410)
+
+
+submit = Button(window,text="submit",command=submit)
+submit.place(x=800,y=310)
+
+
+
+
 
 
 
