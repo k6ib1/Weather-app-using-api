@@ -2,60 +2,199 @@
 
 from locations import capitals
 from weather import fetch_weather_data
-from pathlib import Path
 from tkinter import *
 import random
 
-window = Tk()
 
+# ---------------- WINDOW ----------------
+
+window = Tk()
 
 window.title("What Weather")
 window.config(background="#242424")
-window.geometry("1000x1000")
 
+screen_width = window.winfo_screenwidth()
+screen_height = window.winfo_screenheight()
+
+window.geometry(f"{screen_width}x{screen_height}")
 
 icon = PhotoImage(file="images.png")
 window.iconphoto(True, icon)
 
-label = Label(window,
-            text="What Weather",
-            font=("Arial",40,"bold"),
-            fg="#00ff00", 
-            bg="black",
-            relief=RAISED,
-            bd=15,
-            padx=20,
-            pady=20)
-label.pack()
+
+# ---------------- TITLE ----------------
+
+label = Label(
+    window,
+    text="What Weather",
+    font=("Arial", 40, "bold"),
+    fg="#00ff00",
+    bg="black",
+    relief=RAISED,
+    bd=15,
+    padx=20,
+    pady=20
+)
+
+label.grid(
+    row=0,
+    column=0,
+    columnspan=2,
+    pady=30
+)
+
+
+# ---------------- WEATHER LABELS + FRAME    ----------------
+
+rando_frame = Frame(window,
+                    bg="#151515",
+                    bd=7,
+                    relief = "raised",
+                    )
+
+rando_frame.place(x=30, y=140, width=500, height=800)
+
+capital_label = Label(
+    window,
+    text="Capital: -",
+    font=("Arial", 18),
+    bg="#242424",
+    fg="white"
+)
+
+capital_label.grid(
+    row=2,
+    column=0,
+    sticky="w",
+    padx=50,
+    pady=10
+)
+
+
+latitude_label = Label(
+    window,
+    text="Latitude: -",
+    font=("Arial", 18),
+    bg="#242424",
+    fg="white"
+)
+
+latitude_label.grid(
+    row=3,
+    column=0,
+    sticky="w",
+    padx=50,
+    pady=10
+)
+
+
+longitude_label = Label(
+    window,
+    text="Longitude: -",
+    font=("Arial", 18),
+    bg="#242424",
+    fg="white"
+)
+
+longitude_label.grid(
+    row=4,
+    column=0,
+    sticky="w",
+    padx=50,
+    pady=10
+)
+
+
+elevation_label = Label(
+    window,
+    text="Elevation: -",
+    font=("Arial", 18),
+    bg="#242424",
+    fg="white"
+)
+
+elevation_label.grid(
+    row=5,
+    column=0,
+    sticky="w",
+    padx=50,
+    pady=10
+)
+
+
+hourly_label = Label(
+    window,
+    text="Hourly Data:",
+    font=("Arial", 18),
+    bg="#242424",
+    fg="white"
+)
+
+hourly_label.grid(
+    row=6,
+    column=0,
+    sticky="w",
+    padx=50,
+    pady=20
+)
+
+
+# ---------------- RANDOM BUTTON ----------------
+
+button = Button(
+    window,
+    text="Random Capital!",
+    bg="black",
+    fg="#00ff00",
+    font=("Arial", 20)
+)
+
+
+# ---------------- RANDOM FUNCTION ----------------
 
 def click():
+
     rando_capital = random.choice(capitals)
-    print(f"The capital is ... {rando_capital}!")
+
     data = fetch_weather_data(rando_capital)
-    print(f"The latitude is: {data["latitude"]} ")
-    print(f"The longitude is: {data["longitude"]}")
-    print(f"The elevation is: {data["elevation"]}")
-    print(f"Hourly data: {data["hourly"]}")
-    
+
+    capital_label.config(
+        text=f"Capital: {rando_capital}"
+    )
+
+    latitude_label.config(
+        text=f"Latitude: {data['latitude']}"
+    )
+
+    longitude_label.config(
+        text=f"Longitude: {data['longitude']}"
+    )
+
+    elevation_label.config(
+        text=f"Elevation: {data['elevation']}"
+    )
+    hourly_label.config(
+    text=data["hourly"],
+    font=("Courier New", 12),
+    justify="left"
+    )
 
 
-
-button= Button(window,
-               text="Random Capital!",
-               bg="black",
-               fg="#00ff00"
-                )
-button.pack()
-button.place(relx=0.15, rely=0.20, anchor=CENTER)
 button.config(command=click)
 
-rando_display = Label(window, text = click, )
-rando_display.place(relx=0.5, rely=0.5, anchor= CENTER)
-label.pack()
+button.grid(
+    row=1,
+    column=0,
+    padx=50,
+    pady=20,
+    sticky="w"
+)
 
 
+# ---------------- GRID CONFIGURATION ----------------
+
+window.grid_columnconfigure(0, weight=1)
+window.grid_columnconfigure(1, weight=1)
 
 
-
-
-window.mainloop() # place window on screen
+window.mainloop()
