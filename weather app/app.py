@@ -149,8 +149,6 @@ hourly_label.grid(
 
 
 
-
-
 # ---------------- RANDOM BUTTON ----------------
 
 button = Button(
@@ -176,15 +174,15 @@ def click():
     )
 
     latitude_label.config(
-        text=f"Latitude: {data['latitude']}"
+        text=f"Latitude: {data['latitude']} ° "
     )
 
     longitude_label.config(
-        text=f"Longitude: {data['longitude']}"
+        text=f"Longitude: {data['longitude']} °"
     )
 
     elevation_label.config(
-        text=f"Elevation: {data['elevation']}"
+        text=f"Elevation: {data['elevation']} m "
     )
     hourly_label.config(
     text=data["hourly"],
@@ -217,28 +215,34 @@ title.place(x=800, y= 210,)
 location_entry = Entry(font=("Arial",25), width=50)
 location_entry.place(x=800, y= 260,)
 
-# function to send location to api code and request data
-
 def submit():
-    location = location_entry.get()
-    entry_data = fetch_weather_data(location)
 
-    latitude_name.config(
-        text=f"Latitude: {entry_data['latitude']}"
-    )
+    try:
+        location = location_entry.get()
+        entry_data = fetch_weather_data(location)
 
-    longitude_name.config(
-        text=f"Longitude: {entry_data['longitude']}"
-    )
+        latitude_name.config(
+            text=f"Latitude: {entry_data['latitude']} °"
+        )
 
-    elevation_name.config(
-        text=f"Elevation: {entry_data['elevation']}"
-    )
-    hourly_name.config(
-        text=f"\nHourly Data:\n {entry_data["hourly"]}",
-        font=("Courier New", 12),
-        justify="left"
-    )
+        longitude_name.config(
+            text=f"Longitude: {entry_data['longitude']} °"
+        )
+
+        elevation_name.config(
+            text=f"Elevation: {entry_data['elevation']} m"
+        )
+        hourly_name.config(
+            text=f"\nHourly Data:\n {entry_data["hourly"]}",
+            font=("Courier New", 12),
+            justify="left"
+        )
+
+    except Exception:
+        latitude_name.config(text="Latitude: Not found")
+        longitude_name.config(text="Longitude: Not found")
+        elevation_name.config(text="Elevation: Not found")
+        hourly_name.config(text="Hourly Data: Not found")
 
 
 longitude_name = Label(body_frame, text="Longitude: ",bg="#151515",bd=7,fg="#00ff00", font=("Arial",30))
