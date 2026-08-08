@@ -148,7 +148,6 @@ hourly_label.grid(
 )
 
 
-# --------------- ENTRY STRUCTURE ---------------
 
 
 
@@ -217,6 +216,8 @@ title.place(x=800, y= 210,)
 
 location_entry = Entry(font=("Arial",25), width=50)
 location_entry.place(x=800, y= 260,)
+
+# function to send location to api code and request data
 
 def submit():
     location = location_entry.get()
