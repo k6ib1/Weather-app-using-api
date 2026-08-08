@@ -7,4 +7,4 @@ api's:
 https://open-meteo.com/en/docs/geocoding-api
 https://open-meteo.com/en/docs?latitude=52.519994#api_response
 
-app to be created in tkinter 06/08/26
+app purpose will be to allow the user to enter a location and respond with latitude, longitude, elevation + hourly data on temperature
